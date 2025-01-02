@@ -1,20 +1,27 @@
-function updateDots() {
-  const dots = document.querySelectorAll('.dots span');
-  dots.forEach((dot, idx) => {
-    dot.classList.toggle('active', idx === currentIndex);
-  });
+function rotateCube(side) {
+  const cube = document.getElementById("cube");
+  let rotation = "";
+
+  switch (side) {
+    case "front":
+      rotation = "rotateY(0deg)";
+      break;
+    case "back":
+      rotation = "rotateY(180deg)";
+      break;
+    case "left":
+      rotation = "rotateY(-90deg)";
+      break;
+    case "right":
+      rotation = "rotateY(90deg)";
+      break;
+    case "top":
+      rotation = "rotateX(-90deg)";
+      break;
+    case "bottom":
+      rotation = "rotateX(90deg)";
+      break;
+  }
+
+  cube.style.transform = rotation;
 }
-
-function goToPage(index) {
-  const container = document.getElementById('container');
-  const totalPages = document.querySelectorAll('.page').length;
-
-  currentIndex = Math.max(0, Math.min(index, totalPages - 1));
-  const percentage = currentIndex * -100;
-  container.style.transform = `translateX(${percentage}vw)`;
-
-  updateDots(); // Update dots
-}
-
-// Initialize dots
-updateDots();
