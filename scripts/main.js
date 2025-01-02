@@ -1,27 +1,16 @@
-function rotateCube(side) {
+let rotateX = 0;
+let rotateY = 0;
+
+document.addEventListener("wheel", (event) => {
   const cube = document.getElementById("cube");
-  let rotation = "";
 
-  switch (side) {
-    case "front":
-      rotation = "rotateY(0deg)";
-      break;
-    case "back":
-      rotation = "rotateY(180deg)";
-      break;
-    case "left":
-      rotation = "rotateY(-90deg)";
-      break;
-    case "right":
-      rotation = "rotateY(90deg)";
-      break;
-    case "top":
-      rotation = "rotateX(-90deg)";
-      break;
-    case "bottom":
-      rotation = "rotateX(90deg)";
-      break;
-  }
+  // Adjust rotation based on scroll
+  const deltaY = Math.min(Math.max(event.deltaY, -50), 50); // Clamp scroll speed
+  const deltaX = Math.min(Math.max(event.deltaX, -50), 50);
 
-  cube.style.transform = rotation;
-}
+  rotateY += deltaY * 0.1; // Rotate horizontally
+  rotateX += deltaX * 0.1; // Rotate vertically
+
+  // Apply the transformation
+  cube.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+});
