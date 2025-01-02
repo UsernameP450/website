@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sliding Pages</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      height: 100%;
+      width: 300%;
+      transition: transform 0.8s ease-in-out;
+    }
+
+    .page {
+      height: 100%;
+      width: 100vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+
+    .page1 { background: #3498db; color: #fff; }
+    .page2 { background: #2ecc71; color: #fff; }
+    .page3 { background: #e74c3c; color: #fff; }
+
+    .nav {
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+    }
+
+    .nav button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background: #333;
+      color: #fff;
+      transition: background 0.3s;
+    }
+
+    .nav button:hover {
+      background: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <button onclick="goToPage(0)">Page 1</button>
+    <button onclick="goToPage(1)">Page 2</button>
+    <button onclick="goToPage(2)">Page 3</button>
+  </div>
+
+  <div class="container" id="container">
+    <div class="page page1">Page 1</div>
+    <div class="page page2">Page 2</div>
+    <div class="page page3">Page 3</div>
+  </div>
+
+  <script>
+    function goToPage(index) {
+      const container = document.getElementById('container');
+      const percentage = index * -100; // Calculate percentage to slide
+      container.style.transform = `translateX(${percentage}vw)`;
+    }
+  </script>
+</body>
+</html>
